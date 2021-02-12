@@ -2,13 +2,11 @@
 import { useState, useEffect } from "react"
 import axios from "axios";
 import RepoDetails from "./RepoDetails";
-import Dexie from 'dexie'
-
-
+// import Dexie from 'dexie'
 // import { Offline, Online } from 'react-detect-offline'
 import './App.css';
 
-function App() {
+function App({db}) {
 
 	const [username, setUsername] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -17,6 +15,7 @@ function App() {
 	const [details, setDetails] = useState({});
 	const [detailsLoading, setDetailsLoading] = useState(false);
 
+
 	//useEffect hook to clear previous username repos and Details to am empty object and array when username state changes
 	useEffect(() => {
 		setRepos([]);
@@ -24,11 +23,27 @@ function App() {
 		setError(false)
 	}, [username]);
 
-	// indexedDB using dexie
-	const db = new Dexie("git_database");
-	db.version(1).stores({
-		gitUsers: 'username,repos'
-	});
+	//indexedDB using dexie
+	// useEffect(
+	// 	() => {
+	// 	  // create the store
+	// 	  db.version(1).stores({ formData: 'id,value' })
+	// 	},
+	// 	// run effect whenever the database connection changes
+	// 	[db]
+	//   );
+
+	// sets the repo in the store and in the state hook
+	// const setRepo = id => value => {
+	// 	console.log(db)
+	// 	// update the store
+	// 	db.formData.put({ id, value })
+	// 	// update the state hook
+	// 	setRepos(prevRepos => ({ ...prevRepos, [id]: value }))
+	//   };
+
+	// partial application to make on change handler easier to deal with
+	// const handleSetRepo = id => e => setRepo(id)(e.target.value)
 
 	function handleSubmit(e){
 		e.preventDefault();
@@ -37,31 +52,19 @@ function App() {
 
 	function searchRepos(){
 		setLoading(true);
-		var gituser = db.gitUsers.get(username);
-
-		if(!gituser.length){
-			axios({
-				method: "get",
-				url: `https://api.github.com/users/${username}/repos`,
-			})
-			.then(res => {
-				// console.log(res)
-				db.gitUsers.put({username: username, repos: res.data})
-				alert('this user was loaded from github')
-				// console.log(repos)
-				setLoading(false);
-				setRepos(res.data);
-			})
-			.catch(error => {
-				setLoading(false);
-				setError(true);
-			});
-		}
-		else {
-			var repos = gituser.repos
-			setRepos(repos);
-			alert('this user was loaded from the indexdb')
-		}
+		axios({
+			method: "get",
+			url: `https://api.github.com/users/${username}/repos`,
+		})
+		.then(res => {
+			console.log(res)
+			setLoading(false);
+			setRepos(res.data);
+		})
+		.catch(error => {
+			setLoading(false);
+			setError(true);
+		});
 	}
 
 	function renderRepo(repo){

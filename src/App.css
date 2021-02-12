@@ -109,10 +109,12 @@
 
   .row > h2 {
 	color: rgb(170, 170, 170);
+	color: #ddd;
 	pointer-events: auto;
   }
 
   .row:hover {
+
 	background-color: black;
 	border-radius: 27px;
   }
@@ -126,7 +128,7 @@
   }
 
   .repo-details-container {
-	  border-left: 1px solid white;
+	border-left: 1px solid white;
 	position: fixed;
 	right: 0;
 	height: 100%;
