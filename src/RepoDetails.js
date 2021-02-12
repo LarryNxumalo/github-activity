@@ -1,8 +1,10 @@
+
+
 function RepoDetails({ details, loading }){
 	if(loading){
 		return (
-			<div>
-				<h1 className="loader">Loading...</h1>
+			<div className="loader">
+				<h1>Loading Info...</h1>
 			</div>
 		)
 	}
@@ -10,8 +12,12 @@ function RepoDetails({ details, loading }){
 		return (
 			<div className="repo-details-container">
 				<div className="details-row">
-					<label className="label">Name:</label>
+					<label className="label">Repo-Name:</label>
 					<span className="value">{ details.name }</span>
+				</div>
+				<div className="details-row">
+					<label className="label">Description:</label>
+					<span className="value">{ details.description }</span>
 				</div>
 				<div className="details-row">
 					<label className="label">Forks Count:</label>
@@ -24,6 +30,18 @@ function RepoDetails({ details, loading }){
 				<div className="details-row">
 					<label className="label">Stars:</label>
 					<span className="value">{ details.stargazers_count }</span>
+				</div>
+				<div className="details-row">
+					<label className="label">Subscribers:</label>
+					<span className="value">{ details.subscribers_count }</span>
+				</div>
+				<div className="details-row">
+					<label className="label">Updated At:</label>
+					<span className="value">{ details.updated_at}</span>
+				</div>
+				<div className="details-row">
+					<label className="label">Open Issues:</label>
+					<span className="value">{ details.open_issues}</span>
 				</div>
 			</div>
 		)

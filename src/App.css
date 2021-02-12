@@ -4,20 +4,21 @@
 }
 
 .page-wrapper {
-	height: 100%;
 	min-height: 100%;
 	width: 100%;
+	height: 100%;
 	display: flex;
-	background-color: #282D35;
+	flex-direction: row;
+	background-color: #1d1d1d;
 	overflow-y: scroll;
   }
 
   .top-left {
-	height: 100%;
 	width: 75%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
-	border-right: 1px solid salmon;
+	z-index: 9;
   }
 
   .form {
@@ -26,43 +27,57 @@
 	display: flex;
 	justify-content: center;
 	margin-top: 15px;
+	transition: all ease-in-out .45s;
   }
 
   .input {
 	width: 30%;
 	height: 40px;
 	border: none;
-	border-radius: 6px;
-	font-size: 18px;
+	border-radius: 27px;
+	font-size: 19px;
 	padding-left: 10px;
-	background-color: rgba(255, 255, 255, .3);
-	color: salmon;
+	background-color: rgba(192, 189, 189, 0.3);
+	color: #fff;
+	transition: all ease-in-out .45s;
   }
 
   .input:focus {
-	border: 1px solid salmon;
+	border: 1px solid rgb(255, 255, 255);
+	border-radius: 27px;
 	outline: none;
+	transition: all ease-in-out .45s;
   }
 
   .input::placeholder {
-	color: #282D35;
+	color: rgb(177, 177, 177);
   }
 
   .button {
 	height: 100%;
 	width: 10%;
-	background-color: salmon;
-	border-radius: 5px;
-	border: none;
-	font-size: 18px;
-	color: #282D35;
+	background-color:#000;
+	border-radius: 27px;
+	border: 1px solid white;
+	font-size: 19px;
+	color: #fff;
 	box-sizing: content-box;
 	margin-left: 10px;
 	cursor: pointer;
+	transition: all ease-in-out .45s;
+
   }
 
   .button:focus {
 	outline: none;
+	color: #fff;
+	box-shadow: 0 8px 6px -6px #ddd;
+  }
+  .button:hover {
+	outline: none;
+	background-color: #fff;
+	color: #000;
+	box-shadow: 0 8px 6px -6px #ddd;
   }
 
   .results-container {
@@ -74,6 +89,11 @@
 	align-items: center;
   }
 
+  .results-container h1 {
+	  font-size: 30px;
+	  color: white;
+  }
+
   .row {
 	display: flex;
 	cursor: pointer;
@@ -83,33 +103,39 @@
 	background-color: transparent;
 	border-radius: 5px;
 	align-items: center;
-	justify-content: flex-start;
+	justify-content: flex-end;
 	pointer-events: none;
   }
 
   .row > h2 {
-	color: salmon;
+	color: rgb(170, 170, 170);
 	pointer-events: auto;
   }
 
   .row:hover {
-	background-color: salmon;
+	background-color: black;
+	border-radius: 27px;
   }
 
   .row > h2:hover {
-	color: #282D35;
+	color: #fff;
   }
 
   .repo-name {
-	margin-left: 5px;
+	margin-right: 50px;
   }
 
   .repo-details-container {
+	  border-left: 1px solid white;
+	position: fixed;
+	right: 0;
 	height: 100%;
 	width: 25%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	transition: all ease-in-out .25s;
+	z-index: 8;
   }
 
   .details-row {
@@ -118,6 +144,7 @@
 	display: flex;
 	margin-top: 25px;
 	align-items: center;
+
   }
 
   .label {
@@ -127,10 +154,22 @@
   }
 
   .value {
-	color: salmon;
+	color: #fff;
   }
 
   .loader {
-	color: salmon;
-	margin-left: 5%;
+	position: fixed;
+	right: 10%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+	padding-left: 0%;
+	transition: all ease-in-out .45s;
+  }
+
+  .loader h1 {
+	color: white;
+	font-size: 20px;
+	transition: all ease-in-out .45s;
   }
